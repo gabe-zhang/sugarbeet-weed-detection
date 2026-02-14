@@ -1,0 +1,58 @@
+seed: 0
+experiment:
+  id: yolo26n-v1
+
+model: models/yolo26n.pt
+
+data:
+  path: data/PhenoBench
+  train: images/train
+  val: images/val
+  names:
+    0: sugarbeet
+    1: weed
+
+train:
+  epochs: 100
+  workers: 8
+  batch: 8
+  imgsz: 1024
+  device: "0"
+  patience: 15
+  optimizer: MuSGD
+  # Loss weights
+  box: 7.5   # bounding box regression (CIoU)
+  cls: 0.5   # classification (BCE)
+  dfl: 1.5   # L1 box loss (legacy name; DFL removed in YOLO26)
+
+val:
+  imgsz: 1024
+  device: "0"
+
+augmentation:
+  # Color
+  hsv_h: 0.015
+  hsv_s: 0.7
+  hsv_v: 0.4
+  # Geometric
+  degrees: 0.0
+  translate: 0.1
+  scale: 0.5
+  shear: 0.0
+  perspective: 0.0
+  flipud: 0.0
+  fliplr: 0.5
+  # Mosaic / mix strategies
+  mosaic: 1.0
+  close_mosaic: 10
+  mixup: 0.0
+  cutmix: 0.0
+  copy_paste: 0.0
+  copy_paste_mode: flip
+  # Other
+  bgr: 0.0
+  auto_augment: randaugment
+  erasing: 0.4
+
+wandb:
+  project: sugarbeet-weed-detection
