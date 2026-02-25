@@ -115,7 +115,7 @@ def draw_boxes(
         color = CLS_COLORS.get(cls_id, (255, 255, 255))
         cv2.rectangle(overlay, (x1, y1), (x2, y2), color, 2)
         label = f"{CLS_NAMES.get(cls_id, '?')} {conf:.2f}"
-        (tw, th), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)
+        (tw, th), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 1, 2)
         cv2.rectangle(
             overlay,
             (x1, y1 - th - 4),
@@ -128,9 +128,10 @@ def draw_boxes(
             label,
             (x1, y1 - 2),
             cv2.FONT_HERSHEY_SIMPLEX,
-            0.5,
-            (255, 255, 255),
             1,
+            (0, 0, 0),
+            2,
+            cv2.LINE_AA,
         )
     return cv2.addWeighted(overlay, alpha, img, 1 - alpha, 0)
 
@@ -184,7 +185,7 @@ def run_predict(
 
             if overlay_dir:
                 img = cv2.imread(str(img_path))
-                vis = draw_boxes(img, xyxy, cls_ids, confs)
+                vis = draw_boxes(img, xyxy, cls_ids, confs, alpha=1)
                 cv2.imwrite(
                     str(overlay_dir / img_path.name),
                     vis,
