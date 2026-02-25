@@ -81,7 +81,6 @@ def log_per_class_ap(trainer) -> None:
     names = validator.metrics.names
     ap50 = validator.metrics.box.ap50
     ap = validator.metrics.box.ap
-    print(f"Logging per-class stats for {len(names)} classes to W&B")
     for i, name in names.items():
         wandb.log(
             {
@@ -150,7 +149,7 @@ def main() -> None:
         dfl=train_cfg.get("dfl", 1.5),
         save=True,
         exist_ok=False,
-        pretrained=pretrained_weights is None,
+        pretrained=False,
         verbose=True,
         **aug_cfg,
     )
