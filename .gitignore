@@ -19,6 +19,7 @@ images/
 runs/
 config/archives/
 wandb/
+yolo26n.pt
 
 # Notes
 TODOs.md
