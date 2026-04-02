@@ -60,7 +60,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--test-img-dir",
         type=str,
-        default=("../sugarbeet-weed-segmentation/data/PhenoBench/test/images"),
+        default="data/PhenoBench/test/images",
         help="Test images directory.",
     )
     parser.add_argument("--imgsz", type=int, default=1024)
